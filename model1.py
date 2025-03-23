@@ -32,7 +32,7 @@ def login():
     if form.validate_on_submit():
         db_sess = db_session.create_session()
         user = db_sess.query(User).filter(User.email == form.email.data).first()
-        if user and user.check_password(form.password.data):
+        if user and user.hashed_password == form.password.data:
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
         return render_template('login.html',
@@ -58,7 +58,6 @@ def add_work():
             job=form.job.data,
             work_size=form.work_size.data,
             collaborators=form.collaborators.data,
-            creator=current_user.id,
             is_finished=form.is_finished.data
         )
         db_sess.add(job)
