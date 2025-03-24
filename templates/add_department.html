@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form action="" method="post">
+        {% if message %}
+            <div class="alert alert-{{ message_type }}" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+        {{ form.hidden_tag() }}
+        {% for field in form if field.name not in ('csrf_token', 'submit') %}
+            <p>
+                {{ field.label() }}<br>
+                {% set params = {'class': 'form-control', 'type': 'number' if field.name == 'chief' else ('email' if field.name == 'email' else 'text')} %}
+                {{ field(**params)}}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </p>
+        {% endfor %}
+        <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    </form>
+{% endblock %}

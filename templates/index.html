@@ -7,18 +7,19 @@
         </div>
     {% endif %}
     {% if current_user.is_authenticated %}
-        <a class="btn btn-secondary" href="/addjob">Add job</a>
+        <a class="btn btn-secondary" href="/add_job">Добавить работу</a>
     {% endif %}
+    <a class="btn btn-secondary" href="/departments">Департаменты</a>
     {% for job in jobs %}
-        <h2>Action # {{ loop.index }}</h2>
+        <h2>Работа # {{ loop.index }}</h2>
         <table class="table">
             <thead>
                 <tr class="table-secondary">
-                    <th>Title of activity</th>
-                    <th>Team leader</th>
-                    <th>Duration</th>
-                    <th>List of collaborators</th>
-                    <th>Is finished</th>
+                    <th>Работа</th>
+                    <th>Лидер</th>
+                    <th>Длительность</th>
+                    <th>Работники</th>
+                    <th>Завершена?</th>
                 </tr>
             </thead>
             <tbody style="background-color: lightcyan">
@@ -33,9 +34,9 @@
                 </tr>
             </tbody>
         </table>
-        {% if current_user.id in (1, job.creator) %}
-            <a class="btn btn-warning" href="/edit_job/{{ job.id }}">Edit Job</a>
-            <a class="btn btn-danger" href="/delete_job/{{ job.id }}">Delete Job</a>
+        {% if current_user.id in (1, job.team_leader_id) %}
+            <a class="btn btn-warning" href="/edit_job/{{ job.id }}">Редактировать работу</a>
+            <a class="btn btn-danger" href="/delete_job/{{ job.id }}">Удалить работу</a>
         {% endif %}
     {% endfor %}
 {% endblock %}

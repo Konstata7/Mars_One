@@ -11,12 +11,12 @@ class LoginForm(FlaskForm):
 
 
 class WorksForm(FlaskForm):
-    team_leader = StringField('ID of captain', validators=[DataRequired()])
-    job = StringField('Job', validators=[DataRequired()])
-    work_size = StringField('Work size', validators=[DataRequired()])
-    collaborators = StringField("Collaborators' id", validators=[DataRequired()])
-    is_finished = BooleanField('Is finished?', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    team_leader = StringField('ID лидера', validators=[DataRequired()])
+    job = StringField('Описание работы', validators=[DataRequired()])
+    work_size = StringField('Размер работы', validators=[DataRequired()])
+    collaborators = StringField("ID работников", validators=[DataRequired()])
+    is_finished = BooleanField('Завершена?')
+    submit = SubmitField('Подтвердить')
 
 
 class RegisterForm(FlaskForm):
@@ -30,3 +30,12 @@ class RegisterForm(FlaskForm):
     speciality = StringField('Специализация пользователя', validators=[DataRequired()])
     address = StringField('Адрес пользователя', validators=[DataRequired()])
     submit = SubmitField('Войти')
+
+
+class DepartmentForm(FlaskForm):
+    chief = IntegerField('ID главы', validators=[DataRequired()])
+    title = StringField('Название департамента', validators=[DataRequired()])
+    members = StringField('ID участников',
+                          validators=[DataRequired()])
+    email = EmailField('E-mail департамента', validators=[DataRequired()])
+    submit = SubmitField('Подтвердить')

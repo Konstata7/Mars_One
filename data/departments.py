@@ -1,5 +1,4 @@
 import sqlalchemy
-from sqlalchemy.ext.mutable import MutableList
 import sqlalchemy.orm as orm
 from data.db_session import SqlAlchemyBase
 
@@ -11,6 +10,6 @@ class Department(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)
     title = sqlalchemy.Column(sqlalchemy.String)
     chief = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
-    members = sqlalchemy.Column(MutableList.as_mutable(sqlalchemy.PickleType), default=[])
+    members = sqlalchemy.Column(sqlalchemy.String)
     email = sqlalchemy.Column(sqlalchemy.String)
     user = orm.relationship('User')
